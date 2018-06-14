@@ -1,0 +1,7 @@
+Options +FollowSymLinks -MultiViews -Indexes
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)$ index.php/$1 [L]
+php_value date.timezone America/El_Salvador

@@ -1,0 +1,145 @@
+/*general*/
+body {
+    background-color: rgb(65, 66, 68);
+    color: white;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.derechos {
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+    height: 6%;
+    background-color: rgb(32, 32, 32);
+    color: white;
+    padding: 0;
+    margin: 0;
+    left: 0;
+}
+
+.div1 {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: 91%;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    font-style: normal;
+    font-family: Arial, helvetica, sans-serif;
+}
+/*botones*/
+.opciones1 {
+    background-color: rgb(78, 170, 101);
+}
+
+.opciones2 {
+    background-color: rgb(194, 106, 106);
+}
+
+.opciones1, .opciones2 {
+    border-style: none;
+    color: white;
+    padding: 16px 16px;
+    font-size: 18px;
+    margin: 10px 10px;
+    transition: background-color 0.75s, color 0.75s, padding 0.75s;
+    -webkit-transition: background-color 0.75s, color 0.75s, padding 0.75s;
+    -moz-transition: background-color 0.75s , color 0.75s, padding 0.75s;
+    -o-transition: background-color 0.75s, color 0.75s, padding 0.75s;
+}
+
+.opciones1:hover {
+    background-color: rgb(27, 140, 56);
+    color: black;
+    padding: 20px 20px;
+}
+
+.opciones2:hover {
+    background-color: rgb(173, 65, 65);
+    color: black;
+    padding: 20px 20px;
+}
+
+@media screen and (max-width: 800px) {
+    .opciones1, .opciones2 {
+        width: 80%;
+        height: auto;
+    }
+
+    .derechos, .divMenuJuego {
+        display: none;
+    }
+}
+
+.menuJuego {
+    background-color: rgb(94, 94, 94);
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    height: 9%;
+    position: fixed;
+    z-index: 1;
+    box-shadow: 5px 5px 15px 5px #1d1d1d;
+}
+
+.divMenuJuego {
+    background-color: blue;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    height: 9%;
+    position: absolute;
+}
+
+input[type="text"], input[type="password"] {
+    background-color: rgb(148, 148, 148);
+    text-align: center;
+    border: none;
+    padding: 9px 9px;
+}
+
+.boton1 {
+    background-color: rgb(81, 139, 76);
+    padding: 9px 9px;
+    border: none;
+    color: white;
+    transition: background-color 0.5s;
+    -webkit-transition: background-color 0.5s;
+    -moz-transition: background-color 0.5s;
+    -o-transition: background-color 0.5s;
+}
+
+.boton1:hover {
+    background-color: rgb(50, 94, 47);
+}
+
+.menuJuego button {
+    float: right;
+    margin: 0;
+    padding: 0px 20px;
+    height: 100%;
+}
+
+.boton2 {
+    background-color: rgb(172, 52, 52);
+    padding: 9px 9px;
+    border: none;
+    color: white;
+    transition: background-color 0.5s;
+    -webkit-transition: background-color 0.5s;
+    -moz-transition: background-color 0.5s;
+    -o-transition: background-color 0.5s;
+}
+
+.boton2:hover {
+    background-color: rgb(131, 33, 33);
+}
