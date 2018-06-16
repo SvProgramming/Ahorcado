@@ -1,4 +1,5 @@
-function objetoAjax() {
+function objetoAjax()
+{
   var xmlhttp = false;
 
   try {
@@ -20,16 +21,19 @@ function objetoAjax() {
 
 var xhttp = objetoAjax();
 
-function foco() {
+function foco()
+{
     var txtLetra = document.getElementById('txtLetra').focus();
 }
 
-function limpiar() {
+function limpiar()
+{
     var limpiar = document.getElementById('txtLetra');
     limpiar.value = "";
 }
 
-function enviarEnter(event) {
+function enviarEnter(event)
+{
     var codigo = event.which || event.keyCode;
 
     if(codigo === 13){
@@ -38,7 +42,8 @@ function enviarEnter(event) {
     }
 }
 
-function iniciar() {
+function iniciar()
+{
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("respuesta").innerHTML = this.responseText;
@@ -49,7 +54,8 @@ function iniciar() {
     xhttp.send();
 }
 
-function enviarLetra() {
+function enviarLetra()
+{
     var letra = document.getElementById("txtLetra").value;
 
     if (letra == "") {

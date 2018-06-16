@@ -1,45 +1,44 @@
 <?php
-    include_once("../../engine/engine.php");
+define(__ROOT__,dirname(dirname(dirname(__FILE__))));
+include_once(__ROOT__."/Controladores/singleplayer.controlador.php");
 
-    if (comprobarSession() == false) {
-        header('location: ../../login.php');
-    }
+$objHomeControlador=new SingleplayerControlador('SingleplayerModelo','SingleplayerVista');
+
+if(!$objHomeControlador->comprobarSession())
+{
+    header('location: login');
+}
 ?>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Normal</title>
-        <link rel="stylesheet" href="../../menus/style/estiloGeneral.css">
-        <script type="text/javascript" src="funciones.js"></script>
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    </head>
-    <body onload="iniciar();foco();" onkeydown="enviarEnter(event)">
-        <?php include_once("../../menus/juego/header.php"); ?>
+<div class="div1">
+    <center>
+        <h1><p>Ahorcado Virtual</p></h1>
+    </center>
 
-        <div class="div1">
-            <center>
-                <br><br><br>
+    <center>
+        <h2><p>Bienvenido <font color='#01b438'><?php echo $_SESSION['usuario']; ?></font></p></h2>
+    </center>
 
-                <table>
-                    <tr>
-                        <td><font color='#b48c01'><p><b>&quot;<?php @session_start(); echo $_SESSION['usuario']; ?>&quot;</b></p></font></td>
-                        <td colspan="2"><center id="respuesta"></center></td>
-                    </tr>
+    <center>
+        <h3>
+            <p>
+                High-Score&nbsp;&nbsp;
+                <font color='#aecd17'>
+                    <?php
+                        $resultado = $objHomeControlador->highScore($_SESSION['usuario']);
+                        echo $resultado['puntos'];
+                    ?>
+                </font>
+            </p>
+        </h3>
+    </center>
 
-                    <tr>
-                        <td colspan="3">
-                            <center>
-                                <p>Ingrese una letra</p>
-                                <button class="boton1" name="btnEnviarLetra" onclick="enviarLetra();foco();limpiar();">Aceptar</button>
-                                <input type="text" size="3" name="txtLetra" id="txtLetra" maxlength="1">
-                                <button class="boton2" name="btnCambiarLetra" onclick="iniciar();foco();limpiar();">Nueva Palabra</button>
-                            </center>
-                        </td>
-                    </tr>
-                </table>
-            <center>
-        </div>
-    </body>
-</html>
+    <hr width=100%>
+<center>
+	<button name="opcion" value="4" class="opciones1" onclick="window.location.href='/AhorcadoPhp/singlePlayer/normal';"><p>Modo Libre</p></button>
+	<button name="opcion" value="5" class="opciones2"><p>Contrareloj</p></button>
+	<button name="opcion" value="6" class="opciones1"><p>Agregar Palabra</p></button>
+	<button name="button" class="opciones2"><p>Menu Principal</p></button>
+</center>
+
+</div>
