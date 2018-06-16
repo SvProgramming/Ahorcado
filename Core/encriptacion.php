@@ -16,13 +16,13 @@ class encriptacion
 	public function encriptar($texto)
 	{
 		//esta es la llave publica y unica para cada cifrado
-		$llave = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
+		$llave = password_hash($this->contra, PASSWORD_BCRYPT, ['cost' => 12]);
 		//el iv tiene que contener un maximo de 16 caracteres y unico a la vez
 		$iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
 		//se encripta usando aes 256 cbc (cipher-block chaining)
 		$textoEncriptado = openssl_encrypt($texto, $this->metodo, $llave.$this->contra, OPENSSL_RAW_DATA, $iv);
 		//se retorna un string encriptado en base 64 para proteger la llave publica
-		return base64_encode($textoEncriptado."::".$iv."::".$llave);;
+		return base64_encode($textoEncriptado."::".$iv."::".$llave);
 	}
 
 	public function desencriptar($textoEncriptado)
