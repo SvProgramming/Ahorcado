@@ -70,7 +70,7 @@
         {
           //Entonces llamamos el método por medio de la vistas
           //Llamada dinámica de la vistas
-          print $ObjVista->$accionRequerida($parametrosRequeridos[0],$parametrosRequeridos[1]);
+          print $ObjControlador->$accionRequerida($parametrosRequeridos[0],$parametrosRequeridos[1]);
         }
         else
         {
