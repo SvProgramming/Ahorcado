@@ -1,7 +1,14 @@
 <?php
-    /*if (comprobarSession() == false) {
-        header('location: ../../login.php');
-    }*/
+define(__ROOT__,dirname(dirname(dirname(dirname(__FILE__)))));
+include_once(__ROOT__."/Controladores/singleplayer.controlador.php");
+
+$objHomeControlador=new SingleplayerControlador('SingleplayerModelo','SingleplayerVista');
+
+if(!$objHomeControlador->comprobarSession())
+{
+    header('location: '.urlBase.'login');
+}
+
 ?>
 <div class="centrado" style="padding-top: 65px">
 <div class="div1">

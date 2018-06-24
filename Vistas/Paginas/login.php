@@ -6,7 +6,7 @@ $objLoginControlador = new LoginControlador('LoginModelo','LoginVista');
 
 if($objLoginControlador->comprobarSession())
 {
-    header('location: /AhorcadoPhp');
+    header('location: '.urlBase);
 }
 ?>
 
