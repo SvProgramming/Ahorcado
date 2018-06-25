@@ -34,7 +34,13 @@ class SingleplayerControlador
         }
     }
 
-        public function highScore($usuario)
+    public function ajax($pagina)
+    {
+        define('BaseDir', getcwd());
+        require_once BaseDir.'/Core/Ajax/Singleplayer/'.$pagina.'.ajax.php';
+    }
+
+    public function highScore($usuario)
     {
         $resultado=$this->modelo->buscarPuntajes($usuario);
 
