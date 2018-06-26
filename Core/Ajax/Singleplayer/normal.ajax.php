@@ -1,5 +1,10 @@
 <?php
-if(isset($_POST['letra']))
+define(__ROOT__,dirname(dirname(dirname(dirname(__FILE__)))));
+include_once(__ROOT__."/Controladores/singleplayer.controlador.php");
+
+$objSingleplayerControlador=new SingleplayerControlador('SingleplayerModelo','SingleplayerVista');
+
+if(isset($_POST['evaluarLetra']))
 {
     $letra = trim(strtolower($_POST['letra']));
 
@@ -101,23 +106,7 @@ if(isset($_POST['letra']))
 }
 else
 {
-    unset($_SESSION['letras']);
-    $_SESSION['palabra'] = buscarPalabra($dirDocumentos);
-    $_SESSION['vidas'] = 6;
-    $_SESSION['juegoFinalizado'] = false;
-    $_SESSION['puntaje'] = 0;
-
-    for($i=0; $i < strlen($_SESSION['palabra']['texto']); $i++)
-    {
-        if(substr($_SESSION['palabra']['texto'], $i, 1) === " ")
-        {
-            $_SESSION['letras'][$i] = " ";
-        }
-        else
-        {
-            $_SESSION['letras'][$i] = 0;
-        }
-    }
+    $resultado=$objSingleplayerControlador->iniciarJuego();
 }
 
 $mostrar = "<table><tr><td colspan=" . round((strlen($_SESSION['palabra']['texto'])/2), 0, PHP_ROUND_HALF_UP) . ">";

@@ -22,7 +22,7 @@ foreign key fkPuntuacionXJugador(usuario) references Jugador(usuario) ON UPDATE 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 create table Palabra(
-codigoPalabra int auto_increment not null,
+idPalabra int auto_increment not null,
 texto varchar(25) not null,
 reporte int,
 pista varchar(35) not null,

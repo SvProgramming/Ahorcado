@@ -23,6 +23,24 @@ class SingleplayerModelo
 
         return $resultado;
     }
+
+    public function buscarPalabra($idPalabra)
+    {
+        $conex=new funcionesDB();
+
+        $resultado=$conex->ConsultaPersonalizada("SELECT texto FROM Palabra WHERE idPalabra=$idPalabra");
+
+        return $resultado;
+    }
+
+    public function cantidadDePalabras()
+    {
+        $conex=new funcionesDB();
+
+        $resultado=$conex->ConsultaPersonalizada("SELECT count(texto) FROM Palabra");
+
+        return $resultado;
+    }
 }
 
 ?>

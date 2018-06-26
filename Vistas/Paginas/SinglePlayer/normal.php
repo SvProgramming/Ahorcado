@@ -2,9 +2,9 @@
 define(__ROOT__,dirname(dirname(dirname(dirname(__FILE__)))));
 include_once(__ROOT__."/Controladores/singleplayer.controlador.php");
 
-$objHomeControlador=new SingleplayerControlador('SingleplayerModelo','SingleplayerVista');
+$objSingleplayerControlador=new SingleplayerControlador('SingleplayerModelo','SingleplayerVista');
 
-if(!$objHomeControlador->comprobarSession())
+if(!$objSingleplayerControlador->comprobarSession())
 {
     header('location: '.urlBase.'login');
 }

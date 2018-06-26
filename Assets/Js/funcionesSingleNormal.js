@@ -21,10 +21,11 @@ function objetoAjax()
 
 var xhttp = objetoAjax();
 
-function foco()
-{
-    var txtLetra = document.getElementById('txtLetra').focus();
-}
+
+
+
+
+
 
 function limpiar()
 {
@@ -54,22 +55,3 @@ function iniciar()
     xhttp.send();
 }
 
-function enviarLetra()
-{
-    var letra = document.getElementById("txtLetra").value;
-
-    if (letra == "") {
-        alert('Debe ingresar una letra!');
-        foco();
-    } else {
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("respuesta").innerHTML = this.responseText;
-            }
-        }
-
-        xhttp.open("POST","evaluarPalabra.php", true);
-        xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        xhttp.send("letra=" + letra);
-    }
-}

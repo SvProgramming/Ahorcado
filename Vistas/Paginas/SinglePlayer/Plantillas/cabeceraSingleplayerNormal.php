@@ -8,4 +8,4 @@
         <script src="<?= js ?>jquery.min.js"></script>
         <script type="text/javascript" src="<?= js ?>singleplayer.js"></script>
     </head>
-    <body onload="foco();" onkeydown="enviarEnter(event)">
+    <body onload="iniciar();foco();" onkeydown="enviarEnter(event)">
