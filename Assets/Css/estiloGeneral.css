@@ -168,3 +168,12 @@ input[type="text"], input[type="password"] {
     font-weight: bold;
     border-color: white;
 }
+
+/*input's personalizados*/
+.reloj {
+    background-color: rgb(65, 66, 68);
+    text-align: center;
+    border: none;
+    color: white;
+    padding: 9px 9px;
+}

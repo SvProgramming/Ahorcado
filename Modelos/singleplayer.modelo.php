@@ -28,7 +28,7 @@ class SingleplayerModelo
     {
         $conex=new funcionesDB();
 
-        $resultado=$conex->ConsultaPersonalizada("SELECT texto FROM Palabra WHERE idPalabra=$idPalabra");
+        $resultado=$conex->ConsultaPersonalizada("SELECT * FROM Palabra WHERE idPalabra=$idPalabra");
 
         return $resultado;
     }
@@ -37,7 +37,34 @@ class SingleplayerModelo
     {
         $conex=new funcionesDB();
 
-        $resultado=$conex->ConsultaPersonalizada("SELECT count(texto) FROM Palabra");
+        $resultado=$conex->ConsultaPersonalizada("SELECT count(texto) as conteo FROM Palabra");
+
+        return $resultado;
+    }
+
+    public function agregarPuntos($puntos,$usuario)
+    {
+        $conex=new funcionesDB();
+
+        $resultado=$conex->insertar('Puntuacion', 'puntaje,usuario', "'$puntos','$usuario'");
+
+        return $resultado;
+    }
+
+    public function obtenerPuntajeMaximo($usuario)
+    {
+        $conex=new funcionesDB();
+
+        $resultado=$conex->ConsultaGeneral('Jugador', "usuario='$usuario'");
+
+        return $resultado;
+    }
+
+    public function actualizarMaximoPuntaje($puntos,$usuario)
+    {
+        $conex=new funcionesDB();
+
+        $resultado=$conex->ActualizarRegistros('Jugador', "puntajeMaximo=$puntos", "usuario='$usuario'");
 
         return $resultado;
     }

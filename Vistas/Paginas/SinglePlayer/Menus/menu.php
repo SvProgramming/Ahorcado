@@ -8,7 +8,3 @@
         header('location: /AhorcadoPhp/singlePlayer/');
     }
 ?>
-
-<div class="divMenuJuego">
-
-</div>
