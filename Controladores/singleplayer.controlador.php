@@ -449,9 +449,69 @@ class SingleplayerControlador
 
     /*funciones para agregar palabra*/
 
-    public function agregarPalabra($palabra,$pista)
+    public function agregarPalabra($palabraRecibida,$pistaRecibida)
     {
-        
+        $palabra=trim(strtolower($palabraRecibida));
+
+        $pista=trim(strtolower($pistaRecibida));
+
+        $resultado=$this->verificarPalabra($palabra);
+
+        if($resultado)
+        {
+            $resultado=$this->verificarPalabraRepetida($palabra);
+
+            if($resultado)
+            {
+                $resultado=$this->modelo->agregarPalabra($palabra,$pista);
+
+                if(gettype($resultado)=="string")
+                {
+                    echo $resultado;
+                    exit();
+                }
+                else
+                {
+                    return "Palabra agregada correctamente.";
+                }
+            }
+            else
+            {
+                return "La palabra ya existe en la base de datos.";
+            }
+        }
+        else
+        {
+            return "La palabra no es admitida en este juego. Probablemente lleve contenido vulgar. De no ser así pongase en contacto con los administradores.";
+        }
+    }
+
+    public function verificarPalabra($palabra)
+    {
+        $resultado=$this->modelo->verificarPalabra($palabra);
+
+        if($resultado->num_rows > 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public function verificarPalabraRepetida($palabra)
+    {
+        $resultado=$this->modelo->verificarPalabraRepetida($palabra);
+
+        if($resultado->num_rows > 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
 

@@ -61,7 +61,7 @@ insert into Jugador values ("ref98",1,'QMOvdrvrV/tSOthrJwLpejo6oopmw+p1LTRoNwk1P
 
 insert into Puntuacion(puntaje,usuario) values (0,"ref98");
 
-insert into JugadorXPalabra(usuario,codigoPalabra) values ("ref98",1);
+insert into JugadorXPalabra(usuario,idPalabra) values ("ref98",1);
 
 
 /**selects, updates y deletes**/

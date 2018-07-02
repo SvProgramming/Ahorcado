@@ -11,6 +11,8 @@ if(isset($_POST['agregarPalabra']))
     $pista=$_POST['pista'];
 
     $resultado=$objSingleplayerControlador->agregarPalabra($palabra,$pista);
+
+    echo $resultado;
 }
 
 ?>

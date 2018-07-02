@@ -206,9 +206,11 @@ function enviarPalabra()
     var palabra = document.getElementById("txtPalabra").value;
     var pista = document.getElementById("txtPista").value;
 
+    var respuesta = document.getElementById('respuesta');
+
     if (palabra == "" || pista == "")
     {
-        alert('Debe completar todos los campos!');
+        respuesta.innerHTML='Debe completar todos los campos.';
     }
     else
     {

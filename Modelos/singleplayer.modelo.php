@@ -68,6 +68,33 @@ class SingleplayerModelo
 
         return $resultado;
     }
+
+    public function verificarPalabra($palabra)
+    {
+        $conex=new funcionesDB();
+
+        $resultado=$conex->ConsultaGeneral('PalabraDenegada',"texto='$palabra'");
+
+        return $resultado;
+    }
+
+    public function verificarPalabraRepetida($palabra)
+    {
+        $conex=new funcionesDB();
+
+        $resultado=$conex->ConsultaGeneral('Palabra',"texto='$palabra'");
+
+        return $resultado;
+    }
+
+    public function agregarPalabra($palabra,$pista)
+    {
+        $conex=new funcionesDB();
+
+        $resultado=$conex->insertar('Palabra', 'texto,reporte,pista', "'$palabra',0,'$pista'");
+
+        return $resultado;
+    }
 }
 
 ?>

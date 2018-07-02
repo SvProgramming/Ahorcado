@@ -35,10 +35,10 @@ if(!$objHomeControlador->comprobarSession())
 
     <hr width=100%>
 <center>
-	<button name="opcion" class="opciones1" onclick="window.location.href='/AhorcadoPhp/singlePlayer/normal';"><p>Modo Libre</p></button>
-	<button name="opcion" value="5" class="opciones2"><p>Contrareloj</p></button>
-	<button name="opcion" class="opciones1" onclick="window.location.href='/AhorcadoPhp/singlePlayer/agregarPalabra';"><p>Agregar palabra</p></button>
-	<button name="button" class="opciones2" onclick="window.location.href='/AhorcadoPhp/';"><p>Menu Principal</p></button>
+	<button class="opciones1" onclick="window.location.href='/AhorcadoPhp/singlePlayer/normal';"><p>Modo Libre</p></button>
+    <button class="opciones2" onclick="window.location.href='/AhorcadoPhp/singlePlayer/contraReloj';"><p>Contra reloj</p></button>
+	<button class="opciones1" onclick="window.location.href='/AhorcadoPhp/singlePlayer/agregarPalabra';"><p>Agregar palabra</p></button>
+	<button class="opciones2" onclick="window.location.href='/AhorcadoPhp/';"><p>Menu Principal</p></button>
 </center>
 
 </div>
