@@ -248,12 +248,15 @@ class SingleplayerControlador
                 {
                     session_start();
 
-                    foreach($_SESSION['arrayLetrasUsadas'] as $usada)
+                    if(isset($_SESSION['arrayLetrasUsadas']))
                     {
-                        if($letra==$usada)
+                        foreach($_SESSION['arrayLetrasUsadas'] as $usada)
                         {
-                            echo "<p><font color='#e28e49'>Ya se ingreso la letra " . $letra . "</font></p><br>";
-                            return [false,''];
+                            if($letra==$usada)
+                            {
+                                echo "<p><font color='#e28e49'>Ya se ingreso la letra " . $letra . "</font></p><br>";
+                                return [false,''];
+                            }
                         }
                     }
 
