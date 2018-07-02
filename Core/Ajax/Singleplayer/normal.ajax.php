@@ -19,6 +19,13 @@ if(isset($_POST['evaluarLetra']))
     $tiempo=$_POST['tiempo'];
 
     $resultado=$objSingleplayerControlador->evaluarLetra($letra,$tiempo);
+
+    if($resultado[0])
+    {
+        session_start();
+
+        $_SESSION['arrayLetrasUsadas'][]=$resultado[1];
+    }
 }
 
 if(isset($_POST['iniciarJuego']))
@@ -29,6 +36,17 @@ if(isset($_POST['iniciarJuego']))
     {
         echo $resultado;
     }
+}
+
+if(isset($_POST['noIngresoNada']))
+{
+    $resultado=$objSingleplayerControlador->noIngresoNada();
+}
+
+if(isset($_POST['actualizarLetrasUsadas']))
+{
+    $resultado=$objSingleplayerControlador->actualizarLetrasUsadas();
+    exit();
 }
 
 $resultado=$objSingleplayerControlador->mostrarEspacioLetras();

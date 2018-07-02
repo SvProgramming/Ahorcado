@@ -11,6 +11,12 @@ if(!$objSingleplayerControlador->comprobarSession())
 
 ?>
 <div class="centrado" style="padding-top: 65px">
+    <div id="letrasUsadas" class="centrado oculto">
+        <h3>Letras usadas:</h3>
+    </div>
+
+    <br>
+
     <div class="div1">
         <center>
             <table>
@@ -32,7 +38,7 @@ if(!$objSingleplayerControlador->comprobarSession())
                                 <p>Ingrese una letra</p>
                                 <button class="boton1" name="btnEnviarLetra" onclick="enviarLetra();foco();limpiar();">Aceptar</button>
                                 <input type="text" size="3" name="txtLetra" id="txtLetra" maxlength="1">
-                                <button class="boton2" name="btnCambiarLetra" onclick="iniciar();foco();limpiar();">Nueva Palabra</button>
+                                <button class="boton2" name="btnCambiarLetra" id="cambiarLetra" onclick="iniciar();foco();limpiar();">Nueva Palabra</button>
                             </center>
                         </div>
                         <br>

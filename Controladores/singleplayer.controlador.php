@@ -75,6 +75,7 @@ class SingleplayerControlador
         session_start();
 
         unset($_SESSION['letras']);
+        unset($_SESSION['arrayLetrasUsadas']);
 
         $resultado=$this->buscarPalabra();     
 
@@ -184,42 +185,25 @@ class SingleplayerControlador
         return $mostrar;
     }
 
+    public function noIngresoNada()
+    {
+        echo "<p><font color='#e24949'>Debe ingresar una letra</font></p>";
+    }
+
     public function evaluarLetra($letraRecibida,$tiempoRecibido)
     {
         session_start();
 
-        $letra = trim(strtolower($letraRecibida));
+        $letra = trim(mb_strtolower($letraRecibida));
 
         list($minutos,$segundos)=explode(":", $tiempoRecibido);
 
         $palabra = $_SESSION['palabra']['texto'];
 
-        if($_SESSION['juegoFinalizado'])
-        {
-            if($_SESSION['perdiste'])
-            {
-                echo "<h1><p><font color='#e24949'>Perdiste, la palabra era:</font></p></h1><br>";
-                echo "<h3><p><font color='#e24949'>&quot;<u>" . $_SESSION['palabra']['texto'] . "</u>&quot;</font></p></h3>";
-                echo "<h3><p><font color='#e24949'>&quot;<u>Puntaje: " . $_SESSION['puntaje'] . "</u>&quot;</font></p></h3>";
-                echo "<button class='opciones1' onclick='iniciar();foco();'><p>Jugar de Nuevo</p></button>";
-
-                exit();
-            }
-            else
-            {
-                echo "<h1><p><font color='#01b438'>Felicidades, has ganado.</font></p></h1><br>";
-                echo "<h3><p><font color='#01b438'>&quot;<u>" . $_SESSION['palabra']['texto'] . "</u>&quot;</font></p></h3>";
-                echo "<h3><p><font color='#01b438'>&quot;<u>Puntaje: " . $_SESSION['puntaje'] . "</u>&quot;</font></p></h3>";
-                echo "<button class='opciones1' onclick='iniciar();foco();'><p>Jugar de Nuevo</p></button>";
-
-                exit();
-            }
-        }
-
         if($this->filtroLetras($letra))
         {
             if(!$this->verificarLetraRepetida($letra, $_SESSION['letras']))
-            {
+            {  
                 require_once(__ROOT__."/Core/motor.php");
 
                 $letraEvaluar = new motor($palabra);
@@ -253,16 +237,27 @@ class SingleplayerControlador
                         $resultado=$this->calificar(1, $_SESSION['vidas'], $_SESSION['usuario'],$minutos,$segundos);
                         
                         $_SESSION['puntaje']=$resultado;
-                        echo "<h1><p><font color='#01b438'>Palabra correcta</font></p></h1>";
-                        echo "<h3><p><font color='#01b438'><u>La palabra es: " . $_SESSION['palabra']['texto'] . "</u></font></p></h3>";
-                        echo "<h3><p><font color='#01b438'><u>Puntaje: " . $_SESSION['puntaje'] . "</u></font></p></h3>";
-                        echo "<button class='opciones1' onclick='location.reload()'><p>Jugar de Nuevo</p></button>";
+                        echo "<h1><p><font color='#01b438'>Felicidades, has ganado</font></p></h1>";
+                        echo "<h3><p><font color='#01b438'>La palabra es: " . $_SESSION['palabra']['texto'] . "</font></p></h3>";
+                        echo "<h3><p><font color='#01b438'>Puntaje: " . $_SESSION['puntaje'] . "</font></p></h3>";
+                        echo "<center><button class='opciones1' onclick='location.reload()'><p>Jugar de Nuevo</p></button></center>";
                         
                     }
                 }
                 else
                 {
-                    echo "<h1><p><font color='#e24949'>letra mala</font></p></h1>";
+                    session_start();
+
+                    foreach($_SESSION['arrayLetrasUsadas'] as $usada)
+                    {
+                        if($letra==$usada)
+                        {
+                            echo "<p><font color='#e28e49'>Ya se ingreso la letra " . $letra . "</font></p><br>";
+                            return [false,''];
+                        }
+                    }
+
+                    echo "<p><font color='#e24949'>letra incorrecta</font></p>";
 
                     if($_SESSION['vidas'] > 1)
                     {
@@ -270,26 +265,36 @@ class SingleplayerControlador
                     }
                     else
                     {
-                        echo "<h1><p><font color='#e24949'>Ya no tienes vidas, la palabra era:</font></p></h1>";
-                        echo "<h3><p><font color='#e24949'>&quot;<u>" . $_SESSION['palabra']['texto'] . "</u>&quot;</font></p></h3>";
-                        echo "<h3><p><font color='#e24949'>&quot;<u>Puntaje: " . $_SESSION['puntaje'] . "</u>&quot;</font></p></h3>";
-                        echo "<button class='opciones1' onclick='iniciar();foco();'><p>Jugar de Nuevo</p></button>";
+                        echo "<h1><p><font color='#e24949'>Ya no tienes vidas, has perdido</font></p></h1>";
+                        echo "<h3><p><font color='#e24949'>La palabra es: " . $_SESSION['palabra']['texto'] . "</font></p></h3>";
+                        echo "<h3><p><font color='#e24949'>Puntaje: " . $_SESSION['puntaje'] . "</font></p></h3>";
+                        echo "<center><button class='opciones1' onclick='location.reload()'><p>Jugar de Nuevo</p></button></center>";
 
                         $_SESSION['juegoFinalizado'] = true;
                         $_SESSION['perdiste'] = true;
-
-                        exit();
                     }
                 }
+                return [true,$letra];
             }
             else
             {
-                echo "<h1><p><font color='#e28e49'>Ya se ingreso la letra " . $letra . "</font></p></h1><br>";
+                echo "<p><font color='#e28e49'>Ya se ingreso la letra " . $letra . "</font></p><br>";
+                return [false,''];
             }
         }
         else
         {
-            echo "<h1><p><font color='#e28e49'>Ingrese solo letras.</font></p></h1><br>";
+            echo "<p><font color='#e28e49'>Ingrese solo letras</font></p><br>";
+        }
+    }
+
+    public function actualizarLetrasUsadas()
+    {
+        session_start();
+
+        foreach ($_SESSION['arrayLetrasUsadas'] as $letraU)
+        {
+            echo mb_strtoupper($letraU)." ";
         }
     }
 

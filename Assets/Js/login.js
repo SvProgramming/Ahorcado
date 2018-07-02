@@ -49,6 +49,7 @@ function verificarDatos()
 						div.classList.add('mensaje','mensaje-error');
 
 						div.innerHTML = respuesta;
+						contra.value="";
 						contra.focus();
 			      	}
 			      	else
@@ -75,4 +76,14 @@ function verificarUsuario(usuario)
 	      	resultadoVerificarUsuario = respuesta;
 	      }
 	  });
+}
+
+function enviarEnter(event)
+{
+    var codigo = event.which || event.keyCode;
+
+    if(codigo === 13)
+    {
+      verificarDatos();
+    }
 }

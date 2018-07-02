@@ -71,7 +71,16 @@ function enviarLetra()
 
     if(letra == "")
     {
-        alert('Debe ingresar una letra');
+    	$.ajax({
+		      type      : 'post',
+		      async		:  false,
+		      url       : 'ajax/normal',
+		      data      : {noIngresoNada : true},
+		      success   : function(respuesta)
+		      {
+		      	document.getElementById("respuesta").innerHTML = respuesta;
+		      }
+	  	});
         foco();
     }
     else
@@ -79,6 +88,10 @@ function enviarLetra()
     	iniciarReloj();
 
     	var tiempo = document.getElementById('reloj').value;
+
+    	var botonNuevaPalabra = document.getElementById('cambiarLetra').classList.add('oculto');
+
+    	var divLetrasUsadas = document.getElementById('letrasUsadas').classList.remove('oculto');
 
     	$.ajax({
 		      type      : 'post',
@@ -88,6 +101,8 @@ function enviarLetra()
 		      success   : function(respuesta)
 		      {
 		      	document.getElementById("respuesta").innerHTML = respuesta;
+
+		      	actualizarLetrasUsadas();
 
 		      	juegoFinalizado();
 		      }
@@ -142,4 +157,18 @@ function aumentarReloj()
 
 		setTimeout("aumentarReloj()",1000);
 	}
+}
+
+function actualizarLetrasUsadas()
+{
+	$.ajax({
+		      type      : 'post',
+		      async		:  false,
+		      url       : 'ajax/normal',
+		      data      : {actualizarLetrasUsadas : true},
+		      success   : function(respuesta)
+		      {
+		      	document.getElementById("letrasUsadas").innerHTML='<h3>Letras usadas:</h3>'+respuesta;
+		      }
+	  	});
 }
