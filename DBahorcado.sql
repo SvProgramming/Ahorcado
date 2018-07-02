@@ -26,16 +26,22 @@ idPalabra int auto_increment not null,
 texto varchar(25) not null,
 reporte int,
 pista varchar(35) not null,
-primary key pkPalabra(codigoPalabra)
+primary key pkPalabra(idPalabra)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table PalabraDenegada(
+idPalabraDenegada int auto_increment not null,
+texto varchar(25) not null,
+primary key pkPalabra(idPalabraDenegada)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 create table JugadorXPalabra(
 idJugadorXPalabra int auto_increment not null,
 usuario varchar(30) not null,
-codigoPalabra int not null,
+idPalabra int not null,
 primary key pkJugadorXpalabra(idJugadorXPalabra),
 foreign key fkJugadorXPalabraXJugador(usuario) references Jugador(usuario) ON UPDATE CASCADE ON DELETE CASCADE,
-foreign key fkJugadorXPalabraXPalabra(codigoPalabra) references Palabra(codigoPalabra) ON UPDATE CASCADE ON DELETE CASCADE
+foreign key fkJugadorXPalabraXPalabra(idPalabra) references Palabra(idPalabra) ON UPDATE CASCADE ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -51,9 +57,9 @@ primary key pkUsuariosBuscandoPartida(idBusqueda)
 
 insert into Palabra (texto,reporte,pista) values ("hola mundo",0,"la vieja confiable en progra");
 
-insert into Jugador values ("ref98",1,'QMOvdrvrV/tSOthrJwLpejo6oopmw+p1LTRoNwk1PwRaQjo6JDJ5JDEyJFlYOG1UUkVxcDRvVVBuaDNBWVhEVnVG',5000,0);
+insert into Jugador values ("ref98",1,'QMOvdrvrV/tSOthrJwLpejo6oopmw+p1LTRoNwk1PwRaQjo6JDJ5JDEyJFlYOG1UUkVxcDRvVVBuaDNBWVhEVnVG',0,0);
 
-insert into Puntuacion(puntaje,usuario) values (5000,"ref98");
+insert into Puntuacion(puntaje,usuario) values (0,"ref98");
 
 insert into JugadorXPalabra(usuario,codigoPalabra) values ("ref98",1);
 

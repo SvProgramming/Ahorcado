@@ -172,3 +172,55 @@ function actualizarLetrasUsadas()
 		      }
 	  	});
 }
+
+/*Funciones para agregar palabra*/
+
+
+function focoPalabra()
+{
+    var txtPalabra = document.getElementById('txtPalabra').focus();
+}
+
+function limpiarPalabra()
+{
+    var limpiar1 = document.getElementById('txtPalabra');
+    var limpiar2 = document.getElementById('txtPista');
+    limpiar1.value = "";
+    limpiar2.value = "";
+}
+
+function enviarEnterPalabra(event)
+{
+    var codigo = event.which || event.keyCode;
+
+    if(codigo === 13)
+    {
+      enviarPalabra();
+      limpiar();
+      foco();
+    }
+}
+
+function enviarPalabra()
+{
+    var palabra = document.getElementById("txtPalabra").value;
+    var pista = document.getElementById("txtPista").value;
+
+    if (palabra == "" || pista == "")
+    {
+        alert('Debe completar todos los campos!');
+    }
+    else
+    {
+    	$.ajax({
+		      type      : 'post',
+		      async		:  false,
+		      url       : 'ajax/agregarPalabra',
+		      data      : {palabra : palabra, pista : pista, agregarPalabra : true},
+		      success   : function(respuesta)
+		      {
+		      	document.getElementById("respuesta").innerHTML = respuesta;
+		      }
+	  	});
+    }
+}

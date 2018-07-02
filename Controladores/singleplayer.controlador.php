@@ -446,6 +446,13 @@ class SingleplayerControlador
             }
         }
     }
+
+    /*funciones para agregar palabra*/
+
+    public function agregarPalabra($palabra,$pista)
+    {
+        
+    }
 }
 
 ?>

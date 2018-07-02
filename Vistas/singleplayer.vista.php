@@ -16,6 +16,14 @@ class SingleplayerVista
         require_once('Vistas/Paginas/Singleplayer/normal.php');
         require_once('Vistas/Paginas/Singleplayer/Plantillas/pieSingleplayerNormal.php');
     }
+
+    public function agregarPalabra()
+    {
+        require_once('Vistas/Paginas/Singleplayer/Plantillas/cabeceraSingleplayerAgregarPalabra.php');
+        require_once('Vistas/Paginas/Singleplayer/Menus/menu.php');
+        require_once('Vistas/Paginas/Singleplayer/AgregarPalabra.php');
+        require_once('Vistas/Paginas/Singleplayer/Plantillas/pieSingleplayerAgregarPalabra.php');
+    }
 }
 
 ?>
