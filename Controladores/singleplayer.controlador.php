@@ -482,7 +482,7 @@ class SingleplayerControlador
         }
         else
         {
-            return "La palabra no es admitida en este juego. Probablemente lleve contenido vulgar. De no ser así pongase en contacto con los administradores.";
+            return "La palabra no es admitida en este juego. Probablemente lleve contenido vulgar o lleve caracteres invalidos. De no ser así pongase en contacto con los administradores.";
         }
     }
 
@@ -496,7 +496,28 @@ class SingleplayerControlador
         }
         else
         {
-            return true;
+            $cantidadLetras=strlen($palabra);
+
+            $caracteresInvalidos=false;
+
+            for($i=0;$i<$cantidadLetras;$i++)
+            {
+                $resultado=$this->filtroLetras($palabra[$i]);
+
+                if(!$resultado)
+                {
+                    $caracteresInvalidos=true;
+                }
+            }
+
+            if($caracteresInvalidos)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 

@@ -206,11 +206,11 @@ function enviarPalabra()
     var palabra = document.getElementById("txtPalabra").value;
     var pista = document.getElementById("txtPista").value;
 
-    var respuesta = document.getElementById('respuesta');
+    var divRespuesta = document.getElementById('respuesta');
 
     if (palabra == "" || pista == "")
     {
-        respuesta.innerHTML='Debe completar todos los campos.';
+        divRespuesta.innerHTML='Debe completar todos los campos.';
     }
     else
     {
@@ -221,7 +221,7 @@ function enviarPalabra()
 		      data      : {palabra : palabra, pista : pista, agregarPalabra : true},
 		      success   : function(respuesta)
 		      {
-		      	document.getElementById("respuesta").innerHTML = respuesta;
+		      	divRespuesta.innerHTML = respuesta;
 		      }
 	  	});
     }
