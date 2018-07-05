@@ -36,7 +36,7 @@ if(!$objSingleplayerControlador->comprobarSession())
                         <div class="" id="divEscribirLetras">
                             <center>
                                 <p>Ingrese una letra</p>
-                                <button class="boton1" name="btnEnviarLetra" id="btnEnviarLetra" onclick="enviarLetra(1);foco();limpiar();">Iniciar</button>
+                                <button class="boton1" name="btnEnviarLetra" id="btnEnviarLetra" onclick="enviarLetra(2);foco();limpiar();">Iniciar</button>
                                 <input type="text" size="3" name="txtLetra" id="txtLetra" maxlength="1">
                                 <button class="boton2" name="btnCambiarLetra" id="cambiarLetra" onclick="iniciar();foco();limpiar();">Nueva Palabra</button>
                             </center>

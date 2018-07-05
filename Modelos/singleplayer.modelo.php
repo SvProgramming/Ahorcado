@@ -28,7 +28,7 @@ class SingleplayerModelo
     {
         $conex=new funcionesDB();
 
-        $resultado=$conex->ConsultaPersonalizada("SELECT * FROM Palabra WHERE idPalabra=$idPalabra");
+        $resultado=$conex->ConsultaPersonalizada("SELECT * FROM Palabra");
 
         return $resultado;
     }

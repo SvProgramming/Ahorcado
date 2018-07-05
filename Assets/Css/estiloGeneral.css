@@ -177,3 +177,10 @@ input[type="text"], input[type="password"] {
     color: white;
     padding: 9px 9px;
 }
+
+.reloj-peligro{
+    color: red;
+    font-weight: bold;
+    border-color: white;
+    background-color: #FCCDCD;
+}

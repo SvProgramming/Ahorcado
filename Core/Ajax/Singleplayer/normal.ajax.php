@@ -17,8 +17,9 @@ if(isset($_POST['evaluarLetra']))
 {
     $letra=$_POST['letra'];
     $tiempo=$_POST['tiempo'];
+    $modoJuego=$_POST['modoJuego'];
 
-    $resultado=$objSingleplayerControlador->evaluarLetra($letra,$tiempo);
+    $resultado=$objSingleplayerControlador->evaluarLetra($modoJuego,$letra,$tiempo);
 
     if($resultado[0])
     {
@@ -46,6 +47,12 @@ if(isset($_POST['noIngresoNada']))
 if(isset($_POST['actualizarLetrasUsadas']))
 {
     $resultado=$objSingleplayerControlador->actualizarLetrasUsadas();
+    exit();
+}
+
+if(isset($_POST['finalizarJuegoContraReloj']))
+{
+    echo $objSingleplayerControlador->finalizarJuegoContraReloj();
     exit();
 }
 

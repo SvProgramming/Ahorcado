@@ -33,7 +33,7 @@ function juegoFinalizado()
 		      		var div=document.getElementById('divEscribirLetras');
 		      		var div2=document.getElementById('divRespuesta');
 
-		      		div.classList.add('oculto');
+		      		div.innerHTML="";
 		      		div2.classList.add('oculto');
 		      	}
 		      }
@@ -86,6 +86,8 @@ function enviarLetra()
     else
     {
     	iniciarReloj();
+
+    	document.getElementById('btnEnviarLetra').innerHTML="Aceptar";
 
     	var tiempo = document.getElementById('reloj').value;
 
@@ -225,4 +227,140 @@ function enviarPalabra()
 		      }
 	  	});
     }
+}
+
+/*Funciones para contra reloj*/
+
+
+function enviarLetra(modoJuego)
+{
+    var letra = document.getElementById("txtLetra").value;
+
+    if(letra == "")
+    {
+    	$.ajax({
+		      type      : 'post',
+		      async		:  false,
+		      url       : 'ajax/normal',
+		      data      : {noIngresoNada : true},
+		      success   : function(respuesta)
+		      {
+		      	document.getElementById("respuesta").innerHTML = respuesta;
+		      }
+	  	});
+        foco();
+    }
+    else
+    {
+    	if(modoJuego==1)
+    	{
+    		iniciarReloj();
+    	}
+    	else
+    	{
+    		iniciarContraReloj();
+    	}
+
+    	document.getElementById('btnEnviarLetra').innerHTML="Aceptar";
+
+    	var tiempo = document.getElementById('reloj').value;
+
+    	var botonNuevaPalabra = document.getElementById('cambiarLetra').classList.add('oculto');
+
+    	var divLetrasUsadas = document.getElementById('letrasUsadas').classList.remove('oculto');
+
+    	$.ajax({
+		      type      : 'post',
+		      async		:  false,
+		      url       : 'ajax/normal',
+		      data      : {letra: letra, tiempo: tiempo, modoJuego : modoJuego, evaluarLetra : true},
+		      success   : function(respuesta)
+		      {
+		      	document.getElementById("respuesta").innerHTML = respuesta;
+
+		      	actualizarLetrasUsadas();
+
+		      	juegoFinalizado();
+		      }
+	  	});
+    }
+}
+
+function iniciarContraReloj()
+{
+	if(!iniciado)
+	{
+		var reloj=document.getElementById('reloj');
+
+		reloj.value="1:00";
+
+		iniciado=true;
+
+		minutos=1;
+
+		setTimeout("disminuirReloj()",1000);
+	}
+}
+
+function disminuirReloj()
+{
+	if(!detener)
+	{
+		var reloj=document.getElementById('reloj');
+
+		if(segundos==0)
+		{
+			minutos--;
+			segundos=59;
+
+			reloj.value=minutos+":"+segundos;
+		}
+		else if(minutos == 0 && segundos == 1)
+		{
+			detenerReloj();
+			reloj.value="0:00";
+			finalizarJuego();
+		}
+		else
+		{
+			segundos--;
+
+			if(segundos<=9)
+			{
+				reloj.value=minutos+":0"+segundos;
+			}
+			else
+			{
+				reloj.value=minutos+":"+segundos;
+			}
+		}
+
+		if(segundos==10 && minutos==0)
+		{
+			reloj.classList.add('reloj-peligro');
+		}
+
+		setTimeout("disminuirReloj()",1000);
+	}
+}
+
+function finalizarJuego()
+{
+	$.ajax({
+		      type      : 'post',
+		      async		:  false,
+		      url       : 'ajax/normal',
+		      data      : {finalizarJuegoContraReloj : true},
+		      success   : function(respuesta)
+		      {
+		      	var divRespuesta=document.getElementById('respuesta');
+		      	var div=document.getElementById('divEscribirLetras');
+	      		var div2=document.getElementById('divRespuesta');
+
+	      		divRespuesta.innerHTML=respuesta;
+
+	      		div.innerHTML="";
+	      		div2.classList.add('oculto');
+		      }
+	  	});
 }

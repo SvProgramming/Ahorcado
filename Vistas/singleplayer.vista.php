@@ -21,8 +21,16 @@ class SingleplayerVista
     {
         require_once('Vistas/Paginas/Singleplayer/Plantillas/cabeceraSingleplayerAgregarPalabra.php');
         require_once('Vistas/Paginas/Singleplayer/Menus/menu.php');
-        require_once('Vistas/Paginas/Singleplayer/AgregarPalabra.php');
+        require_once('Vistas/Paginas/Singleplayer/agregarPalabra.php');
         require_once('Vistas/Paginas/Singleplayer/Plantillas/pieSingleplayerAgregarPalabra.php');
+    }
+
+    public function contraReloj()
+    {
+        require_once('Vistas/Paginas/Singleplayer/Plantillas/cabeceraSingleplayerContraReloj.php');
+        require_once('Vistas/Paginas/Singleplayer/Menus/menu.php');
+        require_once('Vistas/Paginas/Singleplayer/contraReloj.php');
+        require_once('Vistas/Paginas/Singleplayer/Plantillas/pieSingleplayerContraReloj.php');
     }
 }
 

@@ -131,7 +131,12 @@ class SingleplayerControlador
             }
             else
             {
-                return $resultado->fetch_assoc();
+                for($i=0;$i<$idPalabra;$i++)
+                {
+                    $retorno=$resultado->fetch_assoc();
+                }
+
+                return $retorno;
             }
         }
     }
@@ -190,7 +195,7 @@ class SingleplayerControlador
         echo "<p><font color='#e24949'>Debe ingresar una letra</font></p>";
     }
 
-    public function evaluarLetra($letraRecibida,$tiempoRecibido)
+    public function evaluarLetra($modoJuego,$letraRecibida,$tiempoRecibido)
     {
         session_start();
 
@@ -234,7 +239,7 @@ class SingleplayerControlador
                     {
                         $_SESSION['perdiste'] = false;
 
-                        $resultado=$this->calificar(1, $_SESSION['vidas'], $_SESSION['usuario'],$minutos,$segundos);
+                        $resultado=$this->calificar($modoJuego, $_SESSION['vidas'], $_SESSION['usuario'],$minutos,$segundos);
                         
                         $_SESSION['puntaje']=$resultado;
                         echo "<h1><p><font color='#01b438'>Felicidades, has ganado</font></p></h1>";
@@ -295,7 +300,7 @@ class SingleplayerControlador
     {
         session_start();
 
-        foreach ($_SESSION['arrayLetrasUsadas'] as $letraU)
+        foreach($_SESSION['arrayLetrasUsadas'] as $letraU)
         {
             echo mb_strtoupper($letraU)." ";
         }
@@ -366,8 +371,6 @@ class SingleplayerControlador
     {
         $puntos = 0;
 
-        $tiempo=(($minutos*60)+$segundos);
-
         switch ($vidas)
         {
             case 6:
@@ -399,8 +402,19 @@ class SingleplayerControlador
                 break;
         }
 
-        $puntos+=(1000-((1000*$tiempo)/300));
+        if($modoJuego==1)
+        {
+            $tiempo=(($minutos*60)+$segundos);
 
+            $puntos+=(1000-((1000*$tiempo)/300));
+        }
+        else
+        {
+            $tiempo=(($minutos*60)+$segundos);
+
+            $puntos+=($tiempo*20);
+        }
+        
         $puntos= str_replace(',', '', number_format($puntos,0));
 
         $resultado=$this->modelo->agregarPuntos($puntos,$username);
@@ -445,6 +459,22 @@ class SingleplayerControlador
                 return true;
             }
         }
+    }
+
+    public function finalizarJuegoContraReloj()
+    {
+        session_start(); 
+                
+        $_SESSION['puntaje']=0;
+
+        echo "<h1><p><font color='#e24949'>Se te acabo el tiempo, has perdido</font></p></h1>";
+        echo "<h3><p><font color='#e24949'>La palabra es: " . $_SESSION['palabra']['texto'] . "</font></p></h3>";
+        echo "<h3><p><font color='#e24949'>Puntaje: " . $_SESSION['puntaje'] . "</font></p></h3>";
+        echo "<center><button class='opciones1' onclick='location.reload()'><p>Jugar de Nuevo</p></button></center>";
+
+
+        $_SESSION['juegoFinalizado'] = true;
+        $_SESSION['perdiste'] = true;
     }
 
     /*funciones para agregar palabra*/
@@ -534,6 +564,7 @@ class SingleplayerControlador
             return true;
         }
     }
+
 }
 
 ?>
