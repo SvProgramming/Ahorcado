@@ -300,9 +300,12 @@ class SingleplayerControlador
     {
         session_start();
 
-        foreach($_SESSION['arrayLetrasUsadas'] as $letraU)
+        if(isset($_SESSION['arrayLetrasUsadas']))
         {
-            echo mb_strtoupper($letraU)." ";
+            foreach($_SESSION['arrayLetrasUsadas'] as $letraU)
+            {
+                echo mb_strtoupper($letraU)." ";
+            }
         }
     }
 
