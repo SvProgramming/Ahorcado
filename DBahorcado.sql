@@ -6,10 +6,13 @@ use PruebaAhorcado;
 
 create table Jugador(
 usuario varchar(30) not null,
-cantidadJuegos int,
 contra varchar(256) not null,
+email varchar(60) not null,
+cantidadJuegos int,
 puntajeMaximo int,
 enLinea bool not null,
+verificado bool not null,
+codigoVerificacion varchar(30),
 primary key pkJugador(usuario)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -57,7 +60,9 @@ primary key pkUsuariosBuscandoPartida(idBusqueda)
 
 insert into Palabra (texto,reporte,pista) values ("hola mundo",0,"la vieja confiable en progra");
 
-insert into Jugador values ("ref98",1,'QMOvdrvrV/tSOthrJwLpejo6oopmw+p1LTRoNwk1PwRaQjo6JDJ5JDEyJFlYOG1UUkVxcDRvVVBuaDNBWVhEVnVG',0,0);
+insert into Jugador
+ values 
+ ("ref98",'QMOvdrvrV/tSOthrJwLpejo6oopmw+p1LTRoNwk1PwRaQjo6JDJ5JDEyJFlYOG1UUkVxcDRvVVBuaDNBWVhEVnVG','robertofunes98@gmail.com',0,0,0,1,'');
 
 insert into Puntuacion(puntaje,usuario) values (0,"ref98");
 

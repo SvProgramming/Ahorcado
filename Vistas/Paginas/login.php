@@ -8,23 +8,20 @@ if($objLoginControlador->comprobarSession())
 {
     header('location: '.urlBase);
 }
+
 ?>
 
 <div class="centrado">
     <center><h1><p>Ahorcado Virtual</p></h1></center>
+   
+<div id="divMensajes" class="oculto">
+    
+</div>
 
     <center>
             <table>
                 <tr>
                     <th colspan="2"><center><p>Iniciar sesion</p></center></th>
-                </tr>
-
-                <tr>
-                    <td colspan="2">
-                        <div id="divMensajes" class="oculto">
-                            
-                        </div>
-                    </td>
                 </tr>
 
                 <tr>
@@ -50,7 +47,7 @@ if($objLoginControlador->comprobarSession())
                 <tr>
                     <td colspan="2">
                         <center>
-                            <button type="button" onclick="window.location.href = 'registro/';" class="boton2">Registrarse</button>
+                            <button type="button" onclick="window.location.href = 'registro';" class="boton2">Registrarse</button>
                             &nbsp;&nbsp;
                             <button name="login" class="boton1" onclick="verificarDatos()">Login</button>
                         </center>
