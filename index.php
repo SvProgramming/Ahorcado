@@ -1,6 +1,6 @@
 <?php
   //Acá deberían de ir los requerimentos, tales como config de la BD etc.
-  require_once "config/variables.php";
+  require_once "Config/variables.php";
 
   //Está es la URL a la que se le hará el routing, se está dividiendo de la siguiente manera :
   // dir_servidor/controlador/accion/parametros
