@@ -6,10 +6,13 @@ use PruebaAhorcado;
 
 create table Jugador(
 usuario varchar(30) not null,
-cantidadJuegos int,
 contra varchar(256) not null,
+email varchar(60) not null,
+cantidadJuegos int,
 puntajeMaximo int,
 enLinea bool not null,
+verificado bool not null,
+codigoVerificacion varchar(30),
 primary key pkJugador(usuario)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -18,24 +21,30 @@ idPuntuacion int auto_increment not null,
 puntaje int not null,
 usuario varchar(30) not null,
 primary key pkPuntuacion(idPuntuacion),
-foreign key fkPuntuacionXJugador(usuario) references Jugador(usuario)
+foreign key fkPuntuacionXJugador(usuario) references Jugador(usuario) ON UPDATE CASCADE ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 create table Palabra(
-codigoPalabra int auto_increment not null,
+idPalabra int auto_increment not null,
 texto varchar(25) not null,
 reporte int,
 pista varchar(35) not null,
-primary key pkPalabra(codigoPalabra)
+primary key pkPalabra(idPalabra)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table PalabraDenegada(
+idPalabraDenegada int auto_increment not null,
+texto varchar(25) not null,
+primary key pkPalabra(idPalabraDenegada)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 create table JugadorXPalabra(
 idJugadorXPalabra int auto_increment not null,
 usuario varchar(30) not null,
-codigoPalabra int not null,
+idPalabra int not null,
 primary key pkJugadorXpalabra(idJugadorXPalabra),
-foreign key fkJugadorXPalabraXJugador(usuario) references Jugador(usuario),
-foreign key fkJugadorXPalabraXPalabra(codigoPalabra) references Palabra(codigoPalabra)
+foreign key fkJugadorXPalabraXJugador(usuario) references Jugador(usuario) ON UPDATE CASCADE ON DELETE CASCADE,
+foreign key fkJugadorXPalabraXPalabra(idPalabra) references Palabra(idPalabra) ON UPDATE CASCADE ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -51,11 +60,13 @@ primary key pkUsuariosBuscandoPartida(idBusqueda)
 
 insert into Palabra (texto,reporte,pista) values ("hola mundo",0,"la vieja confiable en progra");
 
-insert into Jugador values ("ref98",1,'c0IoYL636FuVHDv05YaNhzo6AePhqK4LtpoLi4qN/ITFozo6JDJ5JDEyJGRzbVcvcm5sTndnTDFyTkFkNXlYeE92UnBPM2pyL0VaVTBSVFVJMGN3Qi9DL1ZyOUdsczl1',5000,0);
+insert into Jugador
+ values 
+ ("ref98",'QMOvdrvrV/tSOthrJwLpejo6oopmw+p1LTRoNwk1PwRaQjo6JDJ5JDEyJFlYOG1UUkVxcDRvVVBuaDNBWVhEVnVG','robertofunes98@gmail.com',0,0,0,1,'');
 
-insert into Puntuacion(puntaje,usuario) values (5000,"ref98");
+insert into Puntuacion(puntaje,usuario) values (0,"ref98");
 
-insert into JugadorXPalabra(usuario,codigoPalabra) values ("ref98",1);
+insert into JugadorXPalabra(usuario,idPalabra) values ("ref98",1);
 
 
 /**selects, updates y deletes**/

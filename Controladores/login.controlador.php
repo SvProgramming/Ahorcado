@@ -91,6 +91,7 @@ class LoginControlador
             return true;
         }
     }
+
 }
 
 ?>

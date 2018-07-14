@@ -1,6 +1,6 @@
 <?php 
 define(__ROOT__,dirname(dirname(dirname(__FILE__))));
-include_once(__ROOT__."/Controladores/home.controlador.php");
+include_once(__ROOT__."/Controladores/login.controlador.php");
 
 $objLoginControlador = new LoginControlador('LoginModelo','LoginVista');
 

@@ -100,7 +100,7 @@ p {
     position: absolute;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], input[type='email'] {
     background-color: rgb(148, 148, 148);
     text-align: center;
     border: none;
@@ -149,16 +149,43 @@ input[type="text"], input[type="password"] {
     display: none;
 }
 
+.cargando{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width:400px;
+    height: 300px;
+    z-index: 15;
+    background: lightgray url("../Imagenes/cargando.gif") no-repeat center;
+    margin-left:-200px;
+    margin-top:-150px;
+    padding:5px;
+}
+
+.fondoCargando{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: gray;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+}
+
 /*Contenedores*/
 .centrado{
     margin: auto;
 }
 
 .mensaje{
+    margin: auto;
+    width: 40%;
     padding: .40rem 1rem;
     margin-bottom: 1rem;
     border: 1px solid transparent;
-    border-radius: .50rem
+    border-radius: .50rem;
     text-align: center;
 }
 
@@ -167,4 +194,20 @@ input[type="text"], input[type="password"] {
     color: #DF1919;
     font-weight: bold;
     border-color: white;
+}
+
+/*input's personalizados*/
+.reloj {
+    background-color: rgb(65, 66, 68);
+    text-align: center;
+    border: none;
+    color: white;
+    padding: 9px 9px;
+}
+
+.reloj-peligro{
+    color: red;
+    font-weight: bold;
+    border-color: white;
+    background-color: #FCCDCD;
 }

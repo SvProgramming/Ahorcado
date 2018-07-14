@@ -1,7 +1,15 @@
 <?php
     include_once("conexDB.php");
 
-    
+    function comprobarSession() {
+        @session_start();
+
+        if (!isset($_SESSION['usuario'])) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     function highScore($dirDocumentos, $usuario) {
         $conexion = new conexDB($dirDocumentos);
@@ -116,17 +124,6 @@
         }
     }
 
-    function buscarPalabra($dirDocumentos) {
-        $tabla = "Palabra";
-        $conexion2 = new conexDB($dirDocumentos);
-        $resultados = $conexion2->cantResultados($tabla);
-        $idPalabra = mt_rand(1, $resultados);
-        $sql = "SELECT * FROM Palabra WHERE codigoPalabra = " . $idPalabra;
-        $resultConsultaPalabra = $conexion2->consultaPersonalizada($sql);
-        $conexion2->cerrarConex();
-
-        return $resultConsultaPalabra;
-    }
 
     class motor {
         private $palabra;

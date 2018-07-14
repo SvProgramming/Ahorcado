@@ -74,7 +74,7 @@
         }
         else
         {
-          print $ObjControlador->$accionRequerida();
+          print $ObjVista->$accionRequerida();
         }
       }
       else

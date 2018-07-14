@@ -44,7 +44,9 @@ class funcionesDB
     public function insertar($tabla, $campos, $valores)
     {
         $sql = "INSERT INTO $tabla($campos) VALUES ($valores)";
-        if ($resultado = $this->db->query($sql)) {
+
+        if($resultado = $this->db->query($sql))
+        {
             //Cerrando conexión
             $this->db->close();
             return $resultado;

@@ -7,8 +7,8 @@ class encriptacion
 
 	public function __construct()
 	{
-		//esta es la llave privada
-		$this->contra = '3sc3RLrpd17';
+		//esta es la llave privada 
+		$this->contra = '$2y$12$lL4';
 		//metodo de encriptacion
 		$this->metodo = 'aes-256-cbc';
 	}
@@ -16,7 +16,9 @@ class encriptacion
 	public function encriptar($texto)
 	{
 		//esta es la llave publica y unica para cada cifrado
-		$llave = password_hash($this->contra, PASSWORD_BCRYPT, ['cost' => 12]);
+		$llaveLarga = password_hash($this->contra, PASSWORD_BCRYPT, ['cost' => 12]);
+		//Se deja la llave publica con una longitud de 10 caracteres para que al unirla a la privada sumen los 20 caracteres
+		$llave=substr($llaveLarga, 0, 10);
 		//el iv tiene que contener un maximo de 16 caracteres y unico a la vez
 		$iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
 		//se encripta usando aes 256 cbc (cipher-block chaining)
@@ -35,17 +37,28 @@ class encriptacion
 		return $textoDesencriptado;
 	}
 }
-
 /*
+
 $encriptacion=new encriptacion();
 
 $a=$encriptacion->encriptar('1234');
 
-echo $a."<br><br>";
+echo "El texto encriptado es: ".$a." y su longitud es de ".strlen($a)."<br><br>";
 
 $b=$encriptacion->desencriptar($a);
 
-echo $b."<br><br>";*/
+echo "El texto desencriptado es: ".$b."<br><br>";
+
+echo "<br><br><br>
+		Tabla de cantidad de caracteres que devuelve una encriptacion:<br><br>
+		5 caracteres -> 88 <br>
+		10 caracteres -> 88 <br>
+		20 caracteres -> 112 <br>
+		30 caracteres -> 112 <br>
+		40 caracteres -> 132 <br>
+		50 caracteres -> 152 <br>
+		100 caracteres -> 216 <br>
+";
 
 /*------------------------------Area de pruebas--------------------------------*/
 /*
