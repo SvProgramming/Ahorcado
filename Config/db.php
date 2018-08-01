@@ -1,6 +1,6 @@
 <?php
 @define("__ROOT__", dirname(dirname(__FILE__)));
-require_once(__ROOT__."/core/encriptacion.php");
+require_once(__ROOT__."/Core/encriptacion.php");
 
 @$hostA=fopen(__ROOT__."/config/host.txt", "r");
 @$host=fgets($hostA);
